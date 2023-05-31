@@ -1,0 +1,19 @@
+.filmContainer {
+    display: flex;
+    flex-wrap: wrap;
+    font-style: italic;
+}
+
+.film {
+    border: solid 2px red;
+    border-radius: 5px;
+    width: 250px;
+    margin: 10px;
+}
+
+img {
+    width: 100%;
+}
+span {
+    font-weight: bold;
+}

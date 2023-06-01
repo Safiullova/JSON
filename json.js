@@ -104,13 +104,13 @@
 
     dataJsn =  JSON.stringify(dataJsn); //проебразую объект в JSON (просто так, тема урока такая)))
     console.log(typeof dataJsn); //проверяю тип данных
+    const filmCard = document.querySelector('.filmContainer')
 
     document.addEventListener("DOMContentLoaded", function (event) { // функция срабатывает при загрузке страницы
     let films = JSON.parse (dataJsn); // преобразую JSON в обьект
     console.log (films);
 
     let filmsContent = ""; // Переменная для отрисовки карточки
-
 
     for ( let film of films) { // Цикл перебирает данные для каждой карточки, прописываю разметку будущих карточек
         filmsContent += `<div class='film'>
@@ -122,14 +122,51 @@
             <div><span>Superpowers: </span>${film.superpowers}</div>
             <img src ="${film.url}"></img>
             <div>${film.info}</div>
-            <div class="stars">
-        *****
-        </div>
+            
         </div>`;
     }
     
-    document.querySelector('.filmContainer').innerHTML = filmsContent; //Добавляю html-разметку в нужный элемент
-    // let url = films[0].superpowers;
-    // console.log(url);
-    
+    filmCard.innerHTML = filmsContent; //Добавляю html-разметку в нужный элемент
+
 });
+   
+let rating = document.createElement("div"); // Элемент для звездного рейтинга
+rating.className = "rating";
+filmCard.appendChild (rating); // Удочеряем в карточку 
+
+const stars = document.createElement("div"); // Элемент для вставки звезд
+rating.className = "rating__item";
+rating.appendChild(stars);  // Удочеряем в div
+
+
+rating = document.querySelector('.rating'); // переменная рейтинга
+const ratingItem = document.querySelectorAll('.rating__item'); // коллекция элементов (звезд)
+
+rating.onclick = function(e){ // функция на клик по звездам
+  const target = e.target; // записываю в переменную тот этемент, по которому кликнут
+  if (target.classList.contains ('rating__item')){ // проверка элемента по классу
+    target.classList.add ('active', 'current-active') // добавляю классы, чтоб перекрасить звезды по клику
+  }
+  
+}
+
+rating.onmouseover = function (e) { // обработчик события при наведении мышки на элемент
+  const target = e.target; // записываю в переменную тот этемент, на котором курсор
+  if (target.classList.contains ('rating__item')){ // проверка элемента по классу для обработчика
+    for (let i of ratingItem ) { // Цикл перебирает элементы (звезды)
+        i.classList.remove('active'); // удаляет доп классы в каждом элементе, для очистки рейтинга
+        i.classList.remove('current-active'); 
+      }
+    target.classList.add ('active'); // добавляю классы, чтоб перекрасить звезды в желтый при наведении
+    
+  }
+  for (let i of ratingItem ) { // Цикл перебирает элементы (звезды)
+    if (i.classList.contains ('active')) { // если у элемента уже есть класс active, то цикл прерывается
+      break;
+    } else { 
+      i.classList.add ('active'); // если нет - добавляем всем элементам этот класс
+    }
+  }
+}
+
+

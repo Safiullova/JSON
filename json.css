@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 .filmContainer {
     display: flex;
     flex-wrap: wrap;
@@ -17,3 +21,20 @@ img {
 span {
     font-weight: bold;
 }
+
+.rating {
+    display: flex;
+}
+
+.rating__item {
+    width: 40px;
+    height: 40px;
+    background-color: green;
+    border: 2px solid #fff;
+    cursor: pointer;
+}
+
+.active {
+    background-color: yellow;
+}
+
